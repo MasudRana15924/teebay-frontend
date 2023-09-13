@@ -1,33 +1,40 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { addpriceToStore } from '../../state/product/createPriceSlice';
+import { addpriceToStore, addrentpriceToStore, addrenttypeToStore } from '../../state/product/createPriceSlice';
 import { TextField } from '@mui/material';
 
 const CreatePrice = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const [price, setPrice] = useState('');
+    const [rentprice, setRentPrice] = useState('');
     const [rentType, setRentType] = useState('');
 
     const types = [
         {
 
-            label: 'Choose type ',
+            label: 'Category',
         },
         {
-            value: 'Medical',
-            label: 'Medical',
+            value: 'Per Day',
+            label: 'Per Day',
         },
         {
-            value: 'Dental',
-            label: 'Dental',
+            value: 'Per Week ',
+            label: 'Per Week ',
+        },
+        {
+            value: 'Per Month ',
+            label: 'Per Month',
         },
     ];
     const handleStore = (e) => {
         e.preventDefault();
         if (price) {
             dispatch(addpriceToStore(price));
+            dispatch(addrentpriceToStore(rentprice));
+            dispatch(addrenttypeToStore(rentType));
             navigate('/summary')
         } else {
             alert('enter title')
@@ -39,20 +46,20 @@ const CreatePrice = () => {
         <div className="mt-52">
             <form onSubmit={handleStore}>
                 <div className="w-1/4 mx-auto">
-                    <label for="email" className="block text-xl mb-4 text-gray-900 dark:text-gray-900">Select a title for your product</label>
+                    <label for="email" className="block text-xl mb-4 text-gray-900 dark:text-gray-900">Select Price</label>
 
                     <input type="text" placeholder="" class="mt-2 block w-full placeholder-gray-400/70 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" value={price} onChange={(e) => setPrice(e.target.value)} />
 
                     <div className="flex justify-between gap-8  mt-12">
                         <div>
                             <label for="text" className="text-start block text-md mb-4 text-gray-900 dark:text-gray-900">Rent </label>
-                            <input type="text" placeholder="$ 50" class="mt-2 block w-full placeholder-gray-400/70 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" value={price} onChange={(e) => setPrice(e.target.value)} />
+                            <input type="text" placeholder="$ 50" class="mt-2 block w-full placeholder-gray-400/70 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" value={rentprice} onChange={(e) => setRentPrice(e.target.value)} />
                         </div>
-                        <div className="mt-8">
+                        <div className="w-full mt-8">
                             <TextField
                                 id="standard-select-currency-native"
                                 select
-                                label=""
+                                
                                 defaultValue="EUR"
                                 SelectProps={{
                                     native: true,

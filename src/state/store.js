@@ -8,6 +8,8 @@ import storeReducer from '../state/product/titleSlice';
 import categoryReducer from '../state/product/createCategorySlice';
 import descReducer from '../state/product/createDescriptionSlice';
 import priceReducer from '../state/product/createPriceSlice';
+import  productSlice  from "./product/createProductSlice";
+import  productsSlice  from "./product/allProductsSlice";
 
 
 
@@ -27,7 +29,9 @@ const rootReducer = combineReducers({
   title:storeReducer,
   category:categoryReducer,
   description:descReducer,
-  price:priceReducer
+  price:priceReducer,
+  product:productSlice,
+  products:productsSlice,
 });
 
 const store = configureStore({

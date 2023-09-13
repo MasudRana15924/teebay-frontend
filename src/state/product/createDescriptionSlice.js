@@ -17,14 +17,14 @@ const storeTypeSlice = createSlice({
             localStorage.setItem("description", JSON.stringify(state.description));
 
         },
-        clearStore(state,) {
+        clearDescStore(state,) {
             state.description = [];
             localStorage.setItem("description", JSON.stringify(state.description));
         },
     },
 });
 
-export const {adddescriptionToStore, clearStore } =
+export const {adddescriptionToStore, clearDescStore } =
 storeTypeSlice.actions;
 
 export default storeTypeSlice.reducer;

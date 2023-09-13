@@ -17,14 +17,14 @@ const storeTypeSlice = createSlice({
             localStorage.setItem("category", JSON.stringify(state.category));
 
         },
-        clearStore(state,) {
+        clearCategoryStore(state,) {
             state.category = [];
             localStorage.setItem("category", JSON.stringify(state.category));
         },
     },
 });
 
-export const {addcategoryToStore, clearStore } =
+export const {addcategoryToStore, clearCategoryStore } =
 storeTypeSlice.actions;
 
 export default storeTypeSlice.reducer;
