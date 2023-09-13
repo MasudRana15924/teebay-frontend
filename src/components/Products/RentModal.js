@@ -1,10 +1,14 @@
 import { Box, Modal } from '@mui/material';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createRent } from '../../state/rent/rentSlice';
 import { ToastContainer, toast } from 'react-toastify';
 
 const RentModal = ({ open, handleClose,product }) => {
+    const { loggeduser } = useSelector(
+        (state) => state.userDetails
+    );
+    const userToken = loggeduser.token;
     const dispatch=useDispatch()
     const style = {
         position: 'absolute',
@@ -30,7 +34,7 @@ const RentModal = ({ open, handleClose,product }) => {
     const data={from,to,title,category,description,price,rentprice,rentType}
     const handleCreate=(e)=>{
         e.preventDefault();
-        dispatch(createRent({data}))
+        dispatch(createRent({data,userToken}))
         handleClose();
         toast.success('Rent Successfully Done ', {
             position: "top-right",

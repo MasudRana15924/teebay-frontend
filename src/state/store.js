@@ -14,6 +14,8 @@ import deleteProductSlice from "./product/deleteProductSlice";
 import productDetailsSlice  from "./product/singleProductSlice";
 import createrentSlice from './rent/rentSlice';
 import createBuySlice from './buy/newbuySlice';
+import myproductssSlice  from "./product/myProductsSlice";
+import myrentproductssSlice from "./product/myRentSlice";
 
 
 const persistConfig = {
@@ -38,7 +40,9 @@ const rootReducer = combineReducers({
   delete:deleteProductSlice,
   productDetails:productDetailsSlice,
   rent:createrentSlice,
-  buy:createBuySlice
+  buy:createBuySlice,
+  myProduct:myproductssSlice,
+  myRent:myrentproductssSlice
 });
 
 const store = configureStore({

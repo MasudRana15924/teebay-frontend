@@ -1,13 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { publicPost } from '../utilities/apiCaller';
+import { privatePost } from '../utilities/apiCaller';
 
 
 export const createProduct = createAsyncThunk(
     'product/createProduct',
-    async ({data},{ rejectWithValue }) => {
+    async ({ data, userToken },{ rejectWithValue }) => {
         
         try {
-            const product = await publicPost('/create/product',data);
+            const product = await privatePost('/create/product',userToken, data);
             return product;
           } catch (err) {
             return rejectWithValue(err.response.data.message);

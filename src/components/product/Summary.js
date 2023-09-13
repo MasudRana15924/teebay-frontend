@@ -14,6 +14,11 @@ const Summary = () => {
     const { title } = useSelector(
         (state) => state.title
     );
+    const {loggeduser } = useSelector(
+        (state) => state.userDetails
+    );
+    const userToken = loggeduser.token;
+    console.log(userToken);
     const { category } = useSelector(
         (state) => state.category
     );
@@ -23,10 +28,12 @@ const Summary = () => {
     const { price, rentprice, rentType } = useSelector(
         (state) => state.price
     );
-    const data = { title, category, description, price, rentprice, rentType };
+    const data = ({ title, category, description, price, rentprice, rentType });
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(createProduct({ data }));
+        dispatch(createProduct({
+            data, userToken
+        }));
         toast.success('Product Create Successfully  ', {
             position: "top-right",
             autoClose: 500,

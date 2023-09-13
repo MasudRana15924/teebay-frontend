@@ -1,10 +1,14 @@
 import { Box, Modal } from '@mui/material';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createBuy } from '../../state/buy/newbuySlice';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const BuyModeal = ({ openbuy, handleCloseBuy,product }) => {
+    const { loggeduser } = useSelector(
+        (state) => state.userDetails
+    );
+    const userToken = loggeduser.token;
     const dispatch=useDispatch()
     const style = {
         position: 'absolute',
@@ -30,7 +34,7 @@ const BuyModeal = ({ openbuy, handleCloseBuy,product }) => {
     const data={from,to,title,category,description,price,rentprice,rentType}
     const handleCreate=(e)=>{
         e.preventDefault();
-         dispatch(createBuy({data}))
+         dispatch(createBuy({data,userToken}))
          handleCloseBuy();
          toast.success('Buy Successfully Done ', {
                 position: "top-right",

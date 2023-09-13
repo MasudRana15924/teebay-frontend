@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { publicPost } from "../utilities/apiCaller";
+import { privatePost } from "../utilities/apiCaller";
 
 
 
@@ -11,10 +11,10 @@ const initialState = {
 }
 
 export const createRent = createAsyncThunk(
-    'rent/createRent', async ({ data}, { rejectWithValue }) => {
+    'rent/createRent', async ({ data,userToken}, { rejectWithValue }) => {
 
         try {
-            const rent = await publicPost('/create/rent', data);
+            const rent = await privatePost('/create/rent',userToken, data);
             return rent;
         } catch (err) {
             return rejectWithValue(err);

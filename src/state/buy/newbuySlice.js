@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { publicPost } from "../utilities/apiCaller";
+import { privatePost } from "../utilities/apiCaller";
 
 
 
@@ -12,10 +12,10 @@ const initialState = {
 }
 
 export const createBuy = createAsyncThunk(
-    'buy/createBuy', async ({ data}, { rejectWithValue }) => {
+    'buy/createBuy', async ({ data,userToken}, { rejectWithValue }) => {
 
         try {
-            const buy = await publicPost('/create/buy', data);
+            const buy = await privatePost('/create/buy',userToken, data);
             return buy;
         } catch (err) {
             return rejectWithValue(err);

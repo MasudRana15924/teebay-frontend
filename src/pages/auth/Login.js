@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { createLogin } from '../../state/user/Login/loginSlice';
 import { Alert } from '@mui/material';
 
 const Login = () => {
     const dispatch = useDispatch();
+    const navigate=useNavigate()
     const { error} = useSelector(
         (state) => state.userDetails
     );
@@ -17,7 +18,7 @@ const Login = () => {
         myForm.set("email", email);
         myForm.set("password", password);
         dispatch(createLogin(myForm));
-        console.log(myForm);
+        navigate('/create')
     };
     return (
         <div class="mt-48 w-full max-w-md mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
