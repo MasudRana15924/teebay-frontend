@@ -9,6 +9,7 @@ import CreateDesc from './components/product/CreateDesc';
 import CreatePrice from './components/product/CreatePrice';
 import Summary from './components/product/Summary';
 import Home from './pages/Home/Home';
+import SingleProduct from './pages/product/SingleProduct';
 function App() {
   return (
     <div className="App">
@@ -25,6 +26,7 @@ function App() {
             <Route path="/select/description" element={<CreateDesc></CreateDesc>}/>
             <Route path="/select/price" element={<CreatePrice></CreatePrice>}/>
             <Route path="/summary" element={<Summary></Summary>}/>
+            <Route path="/product/:productId" element={<SingleProduct />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

@@ -15,7 +15,8 @@ const Navbar = () => {
             <header className="absolute inset-x-0 top-0 z-50">
                 <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
                     <div className="flex lg:flex-1">
-                        <p className="text-lg font-semibold  mt-2">TeeBay</p>
+                      <Link to="/">
+                      <p className="text-lg font-semibold  mt-2">TeeBay</p></Link>
                     </div>
                     <div className=" flex gap-x-12">
                         {navigation.map((item) => (

@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import { formatDate } from '../../utilities/helper';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Box, Modal } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { deleteProduct } from '../../state/product/deleteProductSlice';
+import { fetchProduct } from '../../state/product/allProductsSlice';
 const Product = ({ product }) => {
-    const { title, category, price, rentprice, rentType, createdAt } = product
+    const { _id,title, category, price,description, rentprice, rentType, createdAt } = product
 
     const style = {
         position: 'absolute',
@@ -21,12 +24,18 @@ const Product = ({ product }) => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const dispatch = useDispatch();
+    const deleteProductHandler = (_id) => {
+        dispatch(deleteProduct(_id));
+        dispatch(fetchProduct());
+        handleClose();
+      };
     return (
         <div className=" ">
             <div className="w-3/4 mx-auto border  mt-4 p-4">
                 <div className="block text-start mt-2">
                     <div className="flex justify-between">
-                        <Link  >
+                        <Link  to={`/product/${product._id}`}>
                             <p className="text-2xl font-medium 2xl:text-sm 2xl:font-semibold leading-6 text-gray-600" >
                                 {title}
                             </p>
@@ -36,10 +45,13 @@ const Product = ({ product }) => {
                     <p className="text-md font-semibold leading-6 text-gray-500 mt-2" >
                         {category}
                     </p>
+                    <p className="text-md font-semibold leading-6 text-gray-500 mt-2" >
+                        {description}
+                    </p>
                     <p className="text-md font-semibold leading-6 text-gray-500" >
                         {price} rent price ${rentprice} {rentType}
                     </p>
-                    <p className="text-sm font-semibold leading-6 text-gray-500" >
+                    <p className="text-sm font-semibold leading-6 text-gray-400 mt-4" >
                         Date Posted   {formatDate(createdAt)}
                     </p>
 
@@ -55,7 +67,9 @@ const Product = ({ product }) => {
                     <p className="text-3xl text-start">Are your sure want to delete this product ?</p>
                     <div className=" mt-8 flex gap-8  ">
                         <button className="ml-64 h-10 w-14  bg-red-500 text-white border-red-500 rounded-lg">No </button>
-                        <button className="h-10 w-14 bg-violet-500 text-white border-violet-500 border rounded-lg">Yes</button>
+                        <button className="h-10 w-14 bg-violet-500 text-white border-violet-500 border rounded-lg" onClick={() =>
+                deleteProductHandler(_id)
+              }>Yes</button>
                     </div>
                 </Box>
             </Modal>

@@ -26,7 +26,10 @@ export const privateGet = async (endpoint, token) => {
   const response = await axios.get(`${api}${endpoint}`, config);
   return response.data;
 };
-
+export const publicDelete = async (endpoint) => {
+  const response = await axios.delete(`${api}${endpoint}`);
+  return response.data;
+};
 export const privatePost = async (endpoint, token, body) => {
   config.headers.Authorization = `${token}`;
   const response = await axios.post(`${api}${endpoint}`, body, config);

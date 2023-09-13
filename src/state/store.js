@@ -10,7 +10,10 @@ import descReducer from '../state/product/createDescriptionSlice';
 import priceReducer from '../state/product/createPriceSlice';
 import  productSlice  from "./product/createProductSlice";
 import  productsSlice  from "./product/allProductsSlice";
-
+import deleteProductSlice from "./product/deleteProductSlice";
+import productDetailsSlice  from "./product/singleProductSlice";
+import createrentSlice from './rent/rentSlice';
+import createBuySlice from './buy/newbuySlice';
 
 
 const persistConfig = {
@@ -32,6 +35,10 @@ const rootReducer = combineReducers({
   price:priceReducer,
   product:productSlice,
   products:productsSlice,
+  delete:deleteProductSlice,
+  productDetails:productDetailsSlice,
+  rent:createrentSlice,
+  buy:createBuySlice
 });
 
 const store = configureStore({
