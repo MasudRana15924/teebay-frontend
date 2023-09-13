@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { createLogin } from '../../state/user/Login/loginSlice';
@@ -7,9 +7,10 @@ import { Alert } from '@mui/material';
 const Login = () => {
     const dispatch = useDispatch();
     const navigate=useNavigate()
-    const { error} = useSelector(
+    const { error,loggeduser} = useSelector(
         (state) => state.userDetails
     );
+    const user = loggeduser.user
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const registerSubmit = (e) => {
@@ -18,8 +19,13 @@ const Login = () => {
         myForm.set("email", email);
         myForm.set("password", password);
         dispatch(createLogin(myForm));
-        navigate('/create')
     };
+    useEffect(() => {
+        if (user) {
+            navigate('/create');
+            // toast.info('Login Succesfull');
+        }
+    }, [user, navigate,]);
     return (
         <div class="mt-48 w-full max-w-md mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
             <div class="px-6 py-4">
